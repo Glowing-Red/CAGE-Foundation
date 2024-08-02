@@ -1,5 +1,5 @@
 **CAGE Foundation:**
-The CAGE Foundation (Capture, Analyze, Guard, Exploit) is an inhumane, profit-hungry organization that was founded in the 1800s.
+\nThe CAGE Foundation (Capture, Analyze, Guard, Exploit) is an inhumane, profit-hungry organization that was founded in the 1800s.
 The foundation has steadily grown over the centuries through the relentless acquisition and exploitation of anomalous objects, entities, and phenomena.
 Prioritizing profit above all else, the CAGE Foundation utilizes a variety of methods, often unethical and ruthless, to secure and capitalize on these anomalies for maximum gain.
 
@@ -11,6 +11,8 @@ From its inception, the CAGE Foundation has focused on four primary objectives:
 
 The foundation's activities are shrouded in secrecy, with its operations conducted in hidden facilities around the globe.
 Despite numerous ethical and moral controversies, and numerous shell and dummy corporations, The CAGE Foundation remains unchallenged in its quest for dominance, driven by an insatiable appetite for profit and power.
+
+
 
 **Disclaimer:**
 This document is a work of pure fiction.
