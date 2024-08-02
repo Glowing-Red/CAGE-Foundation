@@ -1,0 +1,64 @@
+{
+   "Title": "***x***, **3**, *8* ^^A^^, ,,1,,, --H--, __0__",
+   "Index": "003",
+   "Tags": {},
+
+   "Containment Procedure": "Anomaly-003, designated as the **\"Mind Manipulator\"**, is to be stored in a secure containment unit within the CAGE Foundation’s central repository. Access to Anomaly-001 is restricted to Level 5 personnel and requires explicit authorization from the Director of the Foundation. The containment unit must be constructed of period-appropriate materials to ensure it cannot be tampered with. The unit is to be monitored by a team of high-security personnel equipped with advanced surveillance technology. Any attempts to interact with Anomaly 001 without proper authorization will be met with immediate response and containment protocols.",
+   "Description": "Anomaly-001 is a sophisticated device designed to manipulate and alter human memory. The device consists of a set of intricately carved gears and levers encased in a polished wooden frame. Its surface is engraved with arcane symbols that seem to shimmer faintly under low light. When activated, Anomaly-001 allows its user to alter, erase, or implant memories in individuals. It possesses the unique ability to erase all memories related to a specific person from the target's consciousness, including any associated emotional or sensory experiences.",
+   "Discovery and Initial Analysis": "Anomaly-001 was discovered in early 18██ during an investigation into the origins of the CAGE Foundation. The device was found hidden within an ancient vault in a remote location, previously owned by a secretive order known for their interest in memory manipulation. Initial tests revealed the device's capabilities to alter memories on a profound level, including complete erasure of personal connections.",
+   
+   "Experiment Log": {
+      "Title": "Experiment-%s: %s",
+      
+      "1": {
+         "Title": "Memory Erasure of Specific Person",
+         "Objective": "Test the ability of Anomaly-001 to completely erase memories related to a specific individual.",
+         "Procedure": {
+            "Selection": "Choose a Level-0 personnel with a documented personal history involving a specific individual.",
+            "Activation": "Use Anomaly-001 to erase all memories associated with the selected individual.",
+            "Observation": "Monitor the subject for any residual memories or emotional responses linked to the erased individual."
+         },
+         "Results": "The targeted memories were completely erased, including any emotional or sensory details. The subject showed no signs of residual memory or recognition of the individual, demonstrating the device's total efficacy."
+      },
+      "2": {
+         "Title": "Memory Implantation",
+         "Objective": "Investigate the capability of Anomaly-001 to implant new memories",
+         "Procedure": {
+            "Design": "Develop a set of fabricated memories for implantation.",
+            "Activation": "Use Anomaly-001 to implant these memories into a subject.",
+            "Assessment": "Evaluate the subject's ability to recall and integrate the implanted memories."
+         },
+         "Results": "The subject successfully integrated the implanted memories into their existing memory framework. The memories appeared as authentic as those naturally acquired, indicating the device’s effectiveness in memory manipulation."
+      },
+      "X": {
+         "Title": "",
+         "Objective": "",
+         "Procedure": {
+            "Selection": "",
+            "Activation": "",
+            "Observation": ""
+         },
+         "Results": ""
+      }
+   },
+   "Exploitation Plan": {
+      "Title": "Plan-%s: %s",
+      
+      "A": {
+         "Title": "Foundation’s Strategic Asset",
+         "Objective": "Utilize Anomaly-001 for strategic advantages within the CAGE Foundation.",
+         "Steps": {
+            "High-Value Personnel Reassignment": "Employ Anomaly-001 to erase or alter the memories of key personnel for reassignments or to integrate into high-security roles.",
+            "Operational Secrecy": "Use memory alteration to ensure the confidentiality of sensitive operations and maintain operational security.",
+            "Identity Creation": "Facilitate the creation of new identities for Foundation members who require anonymity or wish to operate under new identities."
+         },
+         "Historical Revision": "Use memory alteration to revise historical narratives or remove unwanted associations related to the Foundation’s activities.",
+         "Crisis Management": "Deploy Anomaly-001 in crisis situations to erase traumatic or compromising memories from affected personnel, ensuring psychological stability and operational continuity."
+      }
+   },
+   "Incident Report": {
+      
+   },
+
+   "Conclusion": "Anomaly-001 represents a powerful tool for memory manipulation with profound implications for personal identity, historical records, and psychological control. The CAGE Foundation’s strategic exploitation of Anomaly-001 can significantly enhance its operational capabilities, secure sensitive information, and influence both internal and external environments. Through careful management and application, Anomaly-001 offers extensive opportunities for advancing the Foundation’s objectives and maintaining control over critical aspects of its operations."
+}

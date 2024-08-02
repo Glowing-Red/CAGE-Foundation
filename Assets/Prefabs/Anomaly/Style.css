@@ -1,0 +1,55 @@
+:root {
+   --light-mode-color: #333;
+   --light-mode-background: #F3F3F3;
+   --dark-mode-color: #ECECEC;
+   --dark-mode-background: #212121;
+}
+
+*, *::before, *::after {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+}
+
+body {
+   overflow-x: hidden;
+   overflow-y: scroll;
+   font-size: .95em;
+   font-family: Inter, RedactRect, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+   font-feature-settings: "case", "ss01", "ss04";
+   color: var(--light-mode-color);
+   background-color: var(--light-mode-background);
+}
+
+.container {
+   display: flex;
+   flex-direction: column;
+   justify-content: start;
+   align-items: center;
+   height: auto;
+   width: 100vw;
+   min-height: calc(100vh - 60px);
+   margin: 0;
+   margin-top: 60px;
+   margin-bottom: 15px;
+}
+
+.content {
+   gap: 25px;
+   height: auto;
+   min-height: 100vh;
+   width: 70%;
+}
+
+.flex-column {
+   display: flex;
+   flex-direction: column;
+   justify-content: start;
+}
+
+.italic {
+   font-style: italic;
+}
+.bold {
+   font-weight: bold;
+}
