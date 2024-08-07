@@ -35,7 +35,7 @@ body {
    width: 100vw;
    min-height: calc(100vh - var(--header-height));
    margin: 0;
-   padding-bottom: 15px;
+   padding-bottom: 25px;
 }
 
 .content {

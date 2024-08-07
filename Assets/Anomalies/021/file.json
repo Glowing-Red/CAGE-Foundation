@@ -1,0 +1,43 @@
+{
+   "Title": "City of The Night",
+   "Index": "021",
+   "Tags": {},
+
+   "Containment Procedure": "",
+   "Description": "",
+   "Discovery and Initial Analysis": "",
+   
+   "Experiment Log": {
+      "Title": "Experiment-%s: %s",
+      
+      "X": {
+         "Title": "",
+         "Objective": "",
+         "Procedure": {
+            "Selection": "",
+            "Activation": "",
+            "Observation": ""
+         },
+         "Results": ""
+      }
+   },
+   "Exploitation Plan": {
+      "Title": "Plan-%s: %s",
+      
+      "X": {
+         "Title": "",
+         "Objective": "",
+         "Steps": {
+            "Step1": "",
+            "Step2": "",
+            "Step3": ""
+         },
+         "Expected Outcomes": ""
+      }
+   },
+   "Incident Report": {
+      
+   },
+
+   "Conclusion": "Anomaly-001 represents a powerful tool for memory manipulation with profound implications for personal identity, historical records, and psychological control. The CAGE Foundation’s strategic exploitation of Anomaly-001 can significantly enhance its operational capabilities, secure sensitive information, and influence both internal and external environments. Through careful management and application, Anomaly-001 offers extensive opportunities for advancing the Foundation’s objectives and maintaining control over critical aspects of its operations."
+}

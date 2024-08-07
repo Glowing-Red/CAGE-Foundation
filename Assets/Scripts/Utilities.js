@@ -23,11 +23,10 @@ function FormatString(template, ...values) {
 }
 
 function FormatText(text) {
-   
    return new Promise((resolve, reject) => {
       const regex = /\[(.*?)\]\((.*?)\)/g;
       const promises = [];
-
+      
       let formattedText = text
          .replace(/\*\*\*(.*?)\*\*\*/g, `<span class="italic bold">$1</span>`)
          .replace(/\*\*(.*?)\*\*/g, `<span class="bold">$1</span>`)
@@ -48,14 +47,14 @@ function FormatText(text) {
          const [fullMatch, linkText, href] = match;
          
          if (linkText === "Anomaly") {
-            const anomalyUrl = `../${href}/File.json`
+            const url = `../${href}`;
 
-            const promise = FetchJson(anomalyUrl).then(json => {
+            const promise = FetchJson(`${url}/File.Json`).then(json => {
                if (json) {
                   if (json["Title"]) {
-                     formattedText = formattedText.replace(fullMatch, `<a href="${anomalyUrl}"><span>${json["Title"]}</span></a>`);
+                     formattedText = formattedText.replace(fullMatch, `<a href="${`${url}/Anomaly.html`}"><span>${json["Title"]}</span></a>`);
                   } else {
-                     formattedText = formattedText.replace(fullMatch, `<a href="${anomalyUrl}"><span>${`Anomaly-${href}`}</span></a>`);
+                     formattedText = formattedText.replace(fullMatch, `<a href="${`${url}/Anomaly.html`}"><span>${`Anomaly-${href}`}</span></a>`);
                   }
                } else {
                   formattedText = formattedText.replace(fullMatch, `<a href="${href}"><span>${linkText}</span></a>`);
@@ -63,7 +62,7 @@ function FormatText(text) {
            }).catch(error => {
                console.error("Error fetching JSON:", error);
            });
-
+           
            promises.push(promise);
          } else {
             text = text.replace(fullMatch, `<a href="${href}"><span>${linkText}</span></a>`);
