@@ -1,5 +1,5 @@
-function FetchJson() {
-   return fetch("./File.json").then(response => {
+function FetchJson(jsonPath) {
+   return fetch(jsonPath).then(response => {
       if (!response.ok) {
          throw new Error("Network response was not ok " + response.statusText);
       }
@@ -23,22 +23,57 @@ function FormatString(template, ...values) {
 }
 
 function FormatText(text) {
-   let formattedText = text
-      .replace(/\*\*\*(.*?)\*\*\*/g, `<span class="italic bold">$1</span>`)
-      .replace(/\*\*(.*?)\*\*/g, `<span class="bold">$1</span>`)
-      .replace(/\*(.*?)\*/g, `<span class="italic">$1</span>`)
-      .replace(/\[(.*?)\]\((.*?)\)/g, `<a href="$2"><span>$1</span></a>`)
-      .replace(/\^\^(.*?)\^\^/g, `<sup>$1</sup>`)
-      .replace(/,,(.*?),,/g, `<sub>$1</sub>`)
-      .replace(/__(.*?)__/g, `<u>$1</u>`)
-      .replace(/--(.*?)--/g, `<del>$1</del>`)
-      .replace(/\n(\d+)/g, (_, n) => {
-         const num = Number(n);
-         return num > 1 ? '<br>'.repeat(num) : '';
-      })
-      .replace(/\n/g, `<br>`);
    
-   return formattedText;
+   return new Promise((resolve, reject) => {
+      const regex = /\[(.*?)\]\((.*?)\)/g;
+      const promises = [];
+
+      let formattedText = text
+         .replace(/\*\*\*(.*?)\*\*\*/g, `<span class="italic bold">$1</span>`)
+         .replace(/\*\*(.*?)\*\*/g, `<span class="bold">$1</span>`)
+         .replace(/\*(.*?)\*/g, `<span class="italic">$1</span>`)
+         .replace(/\^\^(.*?)\^\^/g, `<sup>$1</sup>`)
+         .replace(/,,(.*?),,/g, `<sub>$1</sub>`)
+         .replace(/__(.*?)__/g, `<u>$1</u>`)
+         .replace(/--(.*?)--/g, `<del>$1</del>`)
+         .replace(/\n(\d+)/g, (_, n) => {
+            const num = Number(n);
+            
+            return num > 1 ? '<br>'.repeat(num) : '';
+         })
+         .replace(/\n/g, `<br>`);
+      let match;
+      
+      while ((match = regex.exec(text)) !== null) {
+         const [fullMatch, linkText, href] = match;
+         
+         if (linkText === "Anomaly") {
+            const anomalyUrl = `../${href}/File.json`
+
+            const promise = FetchJson(anomalyUrl).then(json => {
+               if (json) {
+                  if (json["Title"]) {
+                     formattedText = formattedText.replace(fullMatch, `<a href="${anomalyUrl}"><span>${json["Title"]}</span></a>`);
+                  } else {
+                     formattedText = formattedText.replace(fullMatch, `<a href="${anomalyUrl}"><span>${`Anomaly-${href}`}</span></a>`);
+                  }
+               } else {
+                  formattedText = formattedText.replace(fullMatch, `<a href="${href}"><span>${linkText}</span></a>`);
+               }
+           }).catch(error => {
+               console.error("Error fetching JSON:", error);
+           });
+
+           promises.push(promise);
+         } else {
+            text = text.replace(fullMatch, `<a href="${href}"><span>${linkText}</span></a>`);
+         }
+      }
+      
+      Promise.all(promises).then(() => {
+         resolve(formattedText);
+     }).catch(reject);
+   });
 }
 
 function IsTable(item) {

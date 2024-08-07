@@ -31,14 +31,14 @@
          "Results": "Plants grown in Growth Soil exhibited increased susceptibility to pests and diseases, resulting in noticeable damage and disease symptoms compared to control plants."
       },
       "3": {
-         "Title": "Nutritional Content and Growth Rate Coupling with Verdant Gene",
-         "Objective": "Investigate the interaction between Growth Soil and [Verdant Gene](../002/Anomaly.html) in terms of growth rate, resistance, and nutritional content.",
+         "Title": "Nutritional Content and Growth Rate Coupling with Anomaly-002",
+         "Objective": "Investigate the interaction between Growth Soil and [Anomaly](002) in terms of growth rate, resistance, and nutritional content.",
          "Procedure": {
-            "Soil and Gene Integration": "Plant crops with the [Verdant Gene](../002/Anomaly.html) in Growth Soil mixed with standard soil at various ratios (10%, 25%, 50%).",
+            "Soil and Gene Integration": "Plant crops with the [Anomaly](002) in Growth Soil mixed with standard soil at various ratios (10%, 25%, 50%).",
             "Growth Monitoring": "Track the growth rate, health, and yield of the plants over a period of 60 days.",
             "Nutritional Analysis": "Assess the nutritional content of the harvested crops."
          },
-         "Results": "Crops grown with a mixture of Growth Soil and [Verdant Gene](../002/Anomaly.html) exhibited growth rates approximately twice as fast as those grown in standard soil. These crops retained the increased vitamin content provided by the [Verdant Gene](../002/Anomaly.html) and showed a level of resistance similar to that of normal crops grown in standard soil. The combination of Growth Soil and [Verdant Gene](../002/Anomaly.html) effectively balanced rapid growth with improved resilience and enhanced nutritional content."
+         "Results": "Crops grown with a mixture of Growth Soil and [Anomaly](002) exhibited growth rates approximately twice as fast as those grown in standard soil. These crops retained the increased vitamin content provided by the [Anomaly](002) and showed a level of resistance similar to that of normal crops grown in standard soil. The combination of Growth Soil and [Anomaly](002) effectively balanced rapid growth with improved resilience and enhanced nutritional content."
       }
    },
    "Exploitation Plan": {
@@ -66,9 +66,9 @@
       },
       "C": {
          "Title": "Integration with Verdant Gene for Optimal Growth",
-         "Objective": "Maximize the benefits of Growth Soil and [Verdant Gene](../002/Anomaly.html) by integrating them for optimal plant growth and nutritional content.",
+         "Objective": "Maximize the benefits of Growth Soil and [Anomaly](002) by integrating them for optimal plant growth and nutritional content.",
          "Procedure": {
-            "Combined Use Protocol": "Establish protocols for using Growth Soil and [Verdant Gene](../002/Anomaly.html) together to achieve rapid growth with enhanced resistance and nutritional content.",
+            "Combined Use Protocol": "Establish protocols for using Growth Soil and [Anomaly](002) together to achieve rapid growth with enhanced resistance and nutritional content.",
             "Pilot Programs": "Implement pilot programs to test the combined use in various agricultural settings.",
             "Optimization": "Refine the integration process based on pilot program results and develop guidelines for commercial application."
          },
@@ -79,5 +79,5 @@
       
    },
    
-   "Conclusion": "Anomaly-006, Growth Soil, provides a unique tool for accelerating plant growth while presenting challenges related to reduced resistance. By leveraging its properties and integrating it with the [Verdant Gene](../002/Anomaly.html)Verdant Gene, the Foundation can optimize agricultural production, improve plant resilience, and enhance nutritional content. Effective exploitation of this anomaly can lead to significant advancements in agricultural practices and increased efficiency in crop production."
+   "Conclusion": "Anomaly-006, Growth Soil, provides a unique tool for accelerating plant growth while presenting challenges related to reduced resistance. By leveraging its properties and integrating it with the [Anomaly](002), the Foundation can optimize agricultural production, improve plant resilience, and enhance nutritional content. Effective exploitation of this anomaly can lead to significant advancements in agricultural practices and increased efficiency in crop production."
 }

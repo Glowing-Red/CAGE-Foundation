@@ -1,24 +1,37 @@
-const paragraphFilter = ["Title", "Index"];
+const paragraphFilter = ["Title", "Index", "Conclusion"];
 const titleFilter = ["Tags"];
 
 let content;
 
 async function Init() {
    try {
-      const template = await FetchTemplate();
+      const anomalyTemplate = await FetchTemplate();
       
       const parser = new DOMParser();
-      const templateDoc = parser.parseFromString(template, "text/html");
+      const anomalyDoc = parser.parseFromString(anomalyTemplate, "text/html");
       
-      await LoadDocument(templateDoc.head, document.head);
-      await LoadDocument(templateDoc.body, document.body);
+      await LoadDocument(anomalyDoc.head, document.head);
+      await LoadDocument(anomalyDoc.body, document.body);
       
-      content = document.body.querySelector(".content");
-      
-      const table = await FetchJson();
+      const headerPrefab = await FetchPrefab("Header");
+      const anomalyPrefab = await FetchPrefab("Anomaly");
 
-      const docDiv = Instance("div", {}, content);
+      const headerPrefabDoc = parser.parseFromString(headerPrefab, "text/html");
+      const anomalyPrefabDoc = parser.parseFromString(anomalyPrefab, "text/html");
       
+      const headerClone = headerPrefabDoc.querySelector("template").content.cloneNode(true).querySelector('.header');
+      const anomalyClone = anomalyPrefabDoc.querySelector("template").content.cloneNode(true).querySelector('.container');
+      
+      document.body.appendChild(headerClone);
+      document.body.appendChild(anomalyClone);
+      
+      const table = await GetTable();
+      
+      content = anomalyClone.querySelector(".content");
+      document.title = `Cage: Anomaly-${table["Index"]}`
+      document.documentElement.style.setProperty("--header-height", `${headerClone.getBoundingClientRect().height}px`);
+      
+      const docDiv = Instance("div", {}, content);
       if (isValidString(table["Title"])) {
          Instance("h2", {
             "Text": table["Title"]
@@ -30,45 +43,47 @@ async function Init() {
       }
       
       Instance("p", {
-         "Html": FormatText(`**Title:** ${isValidString(table["Title"]) ? table["Title"] : "[MISSING]"}`)
+         "Html": await FormatText(`**Title:** ${isValidString(table["Title"]) ? table["Title"] : "[MISSING]"}`)
       }, docDiv);
       Instance("p", {
-         "Html": FormatText(`**Index:** #${table["Index"]}`)
+         "Html": await FormatText(`**Index:** #${table["Index"]}`)
       }, docDiv);
 
       for (const [key, value] of Object.entries(table)) {
          if (IsTable(value)) {
             if (!titleFilter.includes(key)) {
-               CreateTitle(value, key);
+               await CreateTitle(value, key);
             }
          } else {
             if (!paragraphFilter.includes(key)) {
-               CreateParagraph(key, value);
+               await CreateParagraph(key, value);
             }
          }
       }
+      
+      CreateParagraph("Conclusion", table["Conclusion"]);
    } catch (error) {
       console.error("Initialization error:", error);
    }
 };
 
-function CreateTag(table) {
+async function CreateTag(table) {
 
 }
 
-function CreateParagraph(title, text) {
+async function CreateParagraph(title, text) {
    const div = Instance("div", {});
-
+   
    Instance("p", {
-      "Html": FormatText(FormatString("**%s:** %s", title, text))
+      "Html": await FormatText(FormatString("**%s:** %s", title, text))
    }, div);
-
+   
    div.Parent = content;
-
+   
    return div;
 }
 
-function CreateTitle(table, item) {
+async function CreateTitle(table, item) {
    const length = GetLength(table);
 
    if (length <= 1) {
@@ -117,19 +132,19 @@ function CreateTitle(table, item) {
                   });
                   
                   Instance("p", {
-                     "Html": FormatText(`**${key_2}:**`)
+                     "Html": await FormatText(`**${key_2}:**`)
                   }, keyDiv);
                   
                   for (const [key_3, value_3] of Object.entries(value_2)) {
                      Instance("p", {
-                        "Html": FormatText(`**${key_3}:** ${value_3}`)
+                        "Html": await FormatText(`**${key_3}:** ${value_3}`)
                      }, container);
                   }
                   
                   container.Parent = keyDiv
                } else {
                   Instance("p", {
-                     "Html": FormatText(`**${key_2}:** ${value_2}`)
+                     "Html": await FormatText(`**${key_2}:** ${value_2}`)
                   }, itemContainer);
                }
             }
@@ -185,6 +200,16 @@ function FetchTemplate() {
       }
       
       return response.text();
+   });
+}
+
+function GetTable() {
+   return fetch("./File.json").then(response => {
+      if (!response.ok) {
+         throw new Error("Network response was not ok " + response.statusText);
+      }
+      
+      return response.json();
    });
 }
 
