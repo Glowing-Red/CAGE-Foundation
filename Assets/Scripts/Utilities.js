@@ -57,9 +57,10 @@ function FormatText(text) {
                      formattedText = formattedText.replace(fullMatch, `<a href="${`${url}/Anomaly.html`}"><span>${`Anomaly-${href}`}</span></a>`);
                   }
                } else {
-                  formattedText = formattedText.replace(fullMatch, `<a href="${href}"><span>${linkText}</span></a>`);
+                  formattedText = formattedText.replace(fullMatch, `<a href=""><span>[REDACTED]</span></a>`);
                }
            }).catch(error => {
+               formattedText = formattedText.replace(fullMatch, `<a href=""><span>[REDACTED]</span></a>`);
                console.error("Error fetching JSON:", error);
            });
            
