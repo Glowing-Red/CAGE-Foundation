@@ -15,7 +15,7 @@ Despite numerous ethical and moral controversies, and numerous shell and dummy c
 
 # Disclaimer:<br/>
 This document is a work of pure fiction.<br/>
-Any resemblance to real persons, living or dead, actual events, organizations, foundations, or entities, whether public or private, is purely coincidental.<br/>
+Any resemblance to real people, events, organizations, foundations, or entities, whether public or private, is purely coincidental.<br/>
 The CAGE Foundation, as described herein, is an entirely fictional creation and does not represent or reflect any real-world group, foundation, organization, political situation, or any entity of any kind.<br/>
 The content within this document is meant solely for entertainment and creative purposes.<br/>
 The descriptions, activities, and ethical considerations (or lack thereof) portrayed in this fictional work should not be construed as reflective of any real-world practices, beliefs, or ideologies.<br/>
