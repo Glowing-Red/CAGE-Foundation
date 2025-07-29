@@ -118,7 +118,7 @@ async function CreateTitle(table, item) {
                     "gap": "5px"
                 }
             });
-
+            
             Instance("h3", {
                 "Text": FormatString(table["Title"], key, value["Title"])
             }, itemDiv);
@@ -142,8 +142,8 @@ async function CreateTitle(table, item) {
                                 "Html": await FormatText(`**${key_3}:** ${value_3}`)
                             }, container);
                         }
-
-                        container.Parent = keyDiv
+                        
+                        container.Parent = keyDiv;
                     } else {
                         Instance("p", {
                             "Html": await FormatText(`**${key_2}:** ${value_2}`)
