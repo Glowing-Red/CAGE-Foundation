@@ -27,15 +27,16 @@ async function Init() {
         
         const raw = await FetchJson("./Document.json");
         const table = raw.History[raw.Ids[0]];
+        const title = GetTitle(raw);
 
         content = anomalyClone.querySelector(".content");
-        document.title = `Cage: Anomaly-${table["Index"]}`
+        document.title = `Cage: ${title}`
         document.documentElement.style.setProperty("--header-height", `${headerClone.getBoundingClientRect().height}px`);
 
         const docDiv = Instance("div", {}, content);
         if (IsValidString(table["Title"])) {
             Instance("h2", {
-                "Text": table["Title"]
+                "Text": title
             }, docDiv);
         } else {
             Instance("h2", {
@@ -44,7 +45,7 @@ async function Init() {
         }
 
         Instance("p", {
-            "Html": await FormatText(`**Title:** ${GetTitle(raw)}`)
+            "Html": await FormatText(`**Title:** ${title}`)
         }, docDiv);
         Instance("p", {
             "Html": await FormatText(`**Index:** #${table["Index"]}`)
