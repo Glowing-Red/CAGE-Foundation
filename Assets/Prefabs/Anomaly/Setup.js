@@ -204,7 +204,7 @@ function FetchTemplate() {
 }
 
 function GetTable() {
-    return fetch("./File.json").then(response => {
+    return fetch("./Document.json").then(response => {
         if (!response.ok) {
             throw new Error("Network response was not ok " + response.statusText);
         }
