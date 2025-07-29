@@ -18,6 +18,28 @@ function FetchPrefab(targetPrefab) {
     });
 }
 
+function GetTitle(raw) {
+    if (IsTable(raw) != true) {
+        return "[MISSING]"
+    }
+
+    const id = raw.Ids[0];
+    if (IsValidString(id) != true) {
+        return "[MISSING]"
+    }
+    
+    const version = raw.History[id];
+    if (IsTable(version) != true) {
+        return "[MISSING]"
+    }
+
+    if (IsValidString(version["Title"]) != true) {
+        return "[MISSING]"
+    }
+    
+    return version["Title"]
+}
+
 function FormatString(template, ...values) {
     return template.replace(/%s/g, () => values.shift());
 }
@@ -50,17 +72,15 @@ function FormatText(text) {
                 const url = `../${href}`;
 
                 const promise = FetchJson(`${url}/Document.json`).then(json => {
+                    const title = GetTitle(json)
+
                     if (json) {
-                        if (json["Title"]) {
-                            formattedText = formattedText.replace(fullMatch, `<a href="${`${url}/Anomaly.html`}"><span>${json["Title"]}</span></a>`);
-                        } else {
-                            formattedText = formattedText.replace(fullMatch, `<a href="${`${url}/Anomaly.html`}"><span>${`Anomaly-${href}`}</span></a>`);
-                        }
+                        formattedText = formattedText.replace(fullMatch, `<a href="${`${url}/Anomaly.html`}"><span>${title}</span></a>`);
                     } else {
-                        formattedText = formattedText.replace(fullMatch, `<a href=""><span>[REDACTED]</span></a>`);
+                        formattedText = formattedText.replace(fullMatch, `<a href=""><span>[MISSING]</span></a>`);
                     }
                 }).catch(error => {
-                    formattedText = formattedText.replace(fullMatch, `<a href=""><span>[REDACTED]</span></a>`);
+                    formattedText = formattedText.replace(fullMatch, `<a href=""><span>[MISSING]</span></a>`);
                     console.error("Error fetching JSON:", error);
                 });
 
@@ -80,7 +100,7 @@ function IsTable(item) {
     return Object.prototype.toString.call(item) === "[object Object]";
 }
 
-function isValidString(value) {
+function IsValidString(value) {
     return (typeof value === 'string' && value.trim() !== '' && value !== null);
 }
 

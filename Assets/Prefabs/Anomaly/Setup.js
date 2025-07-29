@@ -18,21 +18,22 @@ async function Init() {
 
         const headerPrefabDoc = parser.parseFromString(headerPrefab, "text/html");
         const anomalyPrefabDoc = parser.parseFromString(anomalyPrefab, "text/html");
-
+        
         const headerClone = headerPrefabDoc.querySelector("template").content.cloneNode(true).querySelector('.header');
         const anomalyClone = anomalyPrefabDoc.querySelector("template").content.cloneNode(true).querySelector('.container');
 
         document.body.appendChild(headerClone);
         document.body.appendChild(anomalyClone);
-
-        const table = await GetTable();
+        
+        const raw = await FetchJson("./Document.json");
+        const table = raw.History[raw.Ids[0]];
 
         content = anomalyClone.querySelector(".content");
         document.title = `Cage: Anomaly-${table["Index"]}`
         document.documentElement.style.setProperty("--header-height", `${headerClone.getBoundingClientRect().height}px`);
 
         const docDiv = Instance("div", {}, content);
-        if (isValidString(table["Title"])) {
+        if (IsValidString(table["Title"])) {
             Instance("h2", {
                 "Text": table["Title"]
             }, docDiv);
@@ -43,7 +44,7 @@ async function Init() {
         }
 
         Instance("p", {
-            "Html": await FormatText(`**Title:** ${isValidString(table["Title"]) ? table["Title"] : "[MISSING]"}`)
+            "Html": await FormatText(`**Title:** ${GetTitle(raw)}`)
         }, docDiv);
         Instance("p", {
             "Html": await FormatText(`**Index:** #${table["Index"]}`)
@@ -200,16 +201,6 @@ function FetchTemplate() {
         }
 
         return response.text();
-    });
-}
-
-function GetTable() {
-    return fetch("./Document.json").then(response => {
-        if (!response.ok) {
-            throw new Error("Network response was not ok " + response.statusText);
-        }
-
-        return response.json();
     });
 }
 
