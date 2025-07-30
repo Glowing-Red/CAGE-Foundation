@@ -1,0 +1,83 @@
+{
+    "Ids": [
+        "2.0.0",
+        "1.1.0",
+        "1.0.0"
+    ],
+    
+    "History": {
+        "2.0.0": {
+            "Title": "Extraterrestrial Factility",
+            "Index": "2048",
+            "Tags": ["Extraterrestrial"],
+            "Description": "Some kind of underground facility with advanced technology, large machines and extraterrestrial organisms.",
+            "Discovery and Initial Analysis": [
+                "An accident occured during an experiment involving [REDACTED] which caused several researchers and workers to vanish out of thin air.",
+                "\nWhat happend to all of them is still not known, but one of them miraculously returned 7 days later when they reappeared inside a cave 6 miles south of Site-117.",
+                " Upon [REDACTED]'s return to the site, she explained that she was teleported to another site or facility that was far more advanced than anything she's ever seen before.",
+                " She described that she saw a large white and black creature 9 floors tall that looked like a humanoid with eyes all over it that was looking down on her.",
+                " The creature had some kind of halo with spikes floating above its head and a crown below.",
+                "\nShe later described that creature was hooked up to large pillars twice the size of the creature, that were connected to the creature's torso through tubes and cables.",
+                " What really scared her though was that before she could even process what she was seeing, an echoing voice ringed through her head saying \"This is not your place.\" before a flash of green blinded her and she found herself in the cave."
+            ],
+            "Investigation": [
+                "After [REDACTED]'s insistance that her body did not make up false memories out of shock to fill in the missed time, it was decided to use [REDACTED] to detect any abnormalities in her condition.",
+                " The testing showed that there were foreign energies never encountered before lingering inside her constitution, indicating that what she was claiming could be a possibility.",
+                " Through the combination of [REDACTED] and [REDACTED] we were able to both view and validate the authenticity of the memories of miss [REDACTED]."
+            ],
+            "Theories": [
+                "There is a possibility that the other workers involved in *Incident-19x082* was transported to the same dimension and have yet to be caught and transported back.",
+                " The possibility that they already were transported back but died before contacting the foundation is also highly possible since they could have been crushed",
+                " inside a wall upon their return, or even gotten lost or stuck deep inside a crevice with no way out.",
+                " Another possiblity is that they died in the incident and were never transported at all, or that they were transported to another dimension entirely and haven't ",
+                " found a way to return."
+            ],
+            "Conclusion": [
+                "Miss [REDACTED] experienced a leap of time and dimension, and was transporeted back by a higher lifeform after appearing in another dimension she did not belong in.",
+                " Through calculations it was determined that the reason she appeared in a cave south of Site-117 was because she was returned to the same coordinates, not location.",
+                " Meaning that because our planet is constantly moving, she was returned the position relative to the dimension that she was at 7 days prior to her return,",
+                " which is different from the position relative to the planet. Why it took her a total of 6 days, 23 hours and 59 minutes to transport there and back is still not known,",
+                " but may be looked into in a future where we've developed time related technology and have the possiblity of making the necessary calculations to determine such things."
+            ]
+        },
+        "1.1.0": {
+            "Title": "Incident - 19x082",
+            "Tags": ["Extraterrestrial"],
+            "Description": "Some kind of underground facility with advanced technology, large machines and extraterrestrial organisms.",
+            "Discovery and Initial Analysis": [
+                "An accident occured during an experiment involving [REDACTED] which caused several researchers and workers to vanish out of thin air.",
+                "\nWhat happend to all of them is still not known, but one of them miraculously returned 7 days later when they reappeared inside a cave 6 miles south of Site-117.",
+                " Upon [REDACTED]'s return to the site, she explained that she was teleported to another site or facility that was far more advanced than anything she's ever seen before.",
+                " She described that she saw a large white and black creature 9 floors tall that looked like a humanoid with eyes all over it that was looking down on her.",
+                " The creature had some kind of halo with spikes floating above its head and a crown below.",
+                "\nShe later described that creature was hooked up to large pillars twice the size of the creature, that were connected to the creature's torso through tubes and cables.",
+                " What really scared her though was that before she could even process what she was seeing, an echoing voice ringed through her head saying \"This is not your place.\" before a flash of green blinded her and she found herself in the cave."
+            ],
+            "Investigation": [
+                "After [REDACTED]'s insistance that her body did not make up false memories out of shock to fill in the missed time, it was decided to use [REDACTED] to detect any abnormalities in her condition.",
+                " The testing showed that there were foreign energies never encountered before lingering inside her constitution, indicating that what she was claiming could be a possibility."
+            ],
+            "Conclusion": [
+                "Miss [REDACTED] will be kept in isolation inside a facility in Site-117.",
+                " Further testing through the usage of the Anomalies [REDACTED] and [REDACTED] will be conducted once they have been transported to the site."
+            ]
+        },
+        "1.0.0": {
+            "Title": "Incident - 19x082",
+            "Tags": [],
+            "Description": "Some kind of underground facility with advanced technology, large machines and extraterrestrial organisms.",
+            "Discovery and Initial Analysis": [
+                "An accident occured during an experiment involving [REDACTED] which caused several researchers and workers to vanish out of thin air.",
+                "\nWhat happend to all of them is still not known, but one of them miraculously returned 7 days later when they reappeared inside a cave 6 miles south of Site-117.",
+                " Upon [REDACTED]'s return to the site, she explained that she was teleported to another site or facility that was far more advanced than anything she's ever seen before.",
+                " She described that she saw a large white and black creature 9 floors tall that looked like a humanoid with eyes all over it that was looking down on her.",
+                " The creature had some kind of halo with spikes floating above its head and a crown below.",
+                "\nShe later described that creature was hooked up to large pillars twice the size of the creature, that were connected to the creature's torso through tubes and cables.",
+                " What really scared her though was that before she could even process what she was seeing, an echoing voice ringed through her head saying \"This is not your place.\" before a flash of green blinded her and she found herself in the cave."
+            ],
+            "Conclusion": [
+                "[REDACTED] is likely experiencing some sort of shock from the time leap caused by the accident."
+            ]
+        }
+    }
+}

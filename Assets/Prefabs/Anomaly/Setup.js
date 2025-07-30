@@ -1,4 +1,4 @@
-const paragraphFilter = ["Title", "Index", "Conclusion"];
+const paragraphFilter = ["Title", "Index"];
 const titleFilter = ["Tags"];
 
 let content;
@@ -18,13 +18,13 @@ async function Init() {
 
         const headerPrefabDoc = parser.parseFromString(headerPrefab, "text/html");
         const anomalyPrefabDoc = parser.parseFromString(anomalyPrefab, "text/html");
-        
+
         const headerClone = headerPrefabDoc.querySelector("template").content.cloneNode(true).querySelector('.header');
         const anomalyClone = anomalyPrefabDoc.querySelector("template").content.cloneNode(true).querySelector('.container');
 
         document.body.appendChild(headerClone);
         document.body.appendChild(anomalyClone);
-        
+
         const raw = await FetchJson("./Document.json");
         const table = raw.History[raw.Ids[0]];
         const title = GetTitle(raw);
@@ -38,32 +38,35 @@ async function Init() {
             Instance("h2", {
                 "Text": title
             }, docDiv);
-        } else {
-            Instance("h2", {
-                "Text": `Anomaly-${table["Index"]}`
-            }, docDiv);
         }
 
-        Instance("p", {
-            "Html": await FormatText(`**Title:** ${title}`)
-        }, docDiv);
-        Instance("p", {
-            "Html": await FormatText(`**Index:** #${table["Index"]}`)
-        }, docDiv);
+        if (table["Index"]) {
+            Instance("p", {
+                "Html": await FormatText(`**Title:** ${title}`)
+            }, docDiv);
+
+            Instance("p", {
+                "Html": await FormatText(`**Index:** #${table["Index"]}`)
+            }, docDiv);
+        }
 
         for (const [key, value] of Object.entries(table)) {
             if (IsTable(value)) {
                 if (!titleFilter.includes(key)) {
                     await CreateTitle(value, key);
                 }
-            } else {
+            }
+            else if (IsArray(value)) {
+                if (!paragraphFilter.includes(key)) {
+                    await CreateParagraph(key, value.join(""));
+                }
+            }
+            else {
                 if (!paragraphFilter.includes(key)) {
                     await CreateParagraph(key, value);
                 }
             }
         }
-
-        CreateParagraph("Conclusion", table["Conclusion"]);
     } catch (error) {
         console.error("Initialization error:", error);
     }
@@ -118,7 +121,7 @@ async function CreateTitle(table, item) {
                     "gap": "5px"
                 }
             });
-            
+
             Instance("h3", {
                 "Text": FormatString(table["Title"], key, value["Title"])
             }, itemDiv);
@@ -142,7 +145,7 @@ async function CreateTitle(table, item) {
                                 "Html": await FormatText(`**${key_3}:** ${value_3}`)
                             }, container);
                         }
-                        
+
                         container.Parent = keyDiv;
                     } else {
                         Instance("p", {

@@ -27,7 +27,7 @@ function GetTitle(raw) {
     if (IsValidString(id) != true) {
         return "[MISSING]"
     }
-    
+
     const version = raw.History[id];
     if (IsTable(version) != true) {
         return "[MISSING]"
@@ -36,7 +36,7 @@ function GetTitle(raw) {
     if (IsValidString(version["Title"]) != true) {
         return "[MISSING]"
     }
-    
+
     return version["Title"]
 }
 
@@ -100,12 +100,92 @@ function IsTable(item) {
     return Object.prototype.toString.call(item) === "[object Object]";
 }
 
+function IsArray(item) {
+    return Array.isArray(item);
+}
+
 function IsValidString(value) {
-    return (typeof value === 'string' && value.trim() !== '' && value !== null);
+    return (typeof value === "string" && value.trim() !== "");
+}
+
+function IsNumber(value) {
+    if (typeof value === "number" && !isNaN(value)) {
+        return true;
+    }
+
+    return false;
+}
+
+function IsBoolean(value) {
+    return typeof value === "boolean";
+}
+
+function ToNumber(parameter) {
+    const parsed = parseFloat(parameter);
+
+    if (isNaN(parsed)) {
+        return NaN;
+    }
+
+    return parsed;
+}
+
+function ToBoolean(param) {
+    if (IsBoolean(param)) {
+        return param;
+    }
+
+    if (IsValidString(param)) {
+        const lowerParam = param.toLowerCase();
+
+        if (lowerParam === "true") {
+            return true;
+        } else if (lowerParam === "false") {
+            return;
+        }
+    }
+
+    if (IsNumber(ToNumber(param))) {
+        if (IsNumber(ToNumber(param)) === 1) {
+            return true;
+        } else if (IsNumber(ToNumber(param)) === 0) {
+            return false;
+        }
+    }
+
+    return false;
+}
+
+function ToString(parameter) {
+    return String(parameter);
 }
 
 function GetLength(table) {
-    return Object.entries(table).length;
+    return Object.keys(table).length;
+}
+
+function GetKeys(table) {
+    return Object.keys(table);
+}
+
+function ForTable(table, callback) {
+    const keys = Object.keys(table);
+
+    for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+
+        callback(key, i, table[key]);
+    }
+}
+
+function ForArray(array, callback) {
+    if (!Array.isArray(array)) {
+        throw new TypeError("Expected an array");
+    }
+
+    for (let i = 0; i < array.length; i++) {
+        callback(i, array[i]);
+    }
 }
 
 function PropertyConvert(property) {
