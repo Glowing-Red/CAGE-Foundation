@@ -12,7 +12,7 @@
             "Experiment Log": {
                 "Title": "Experiment-%s: %s",
                 "1": {
-                    "Title": "Growth Rate and Health Analysis",
+                    "Title": "Experiment-1: Growth Rate and Health Analysis",
                     "Objective": "Assess the impact of Growth Soil on plant growth rates and overall health.",
                     "Procedure": {
                         "Soil Preparation": "Mix Growth Soil with standard agricultural soil at various ratios (10%, 25%, 50%).",
@@ -22,7 +22,7 @@
                     "Results": "Plants grown in soil mixtures containing Growth Soil exhibited significantly faster growth rates compared to control plants. However, these plants showed reduced resilience to pests and diseases, resulting in higher rates of damage and stress-related issues."
                 },
                 "2": {
-                    "Title": "Pest and Disease Resistance",
+                    "Title": "Experiment-2: Pest and Disease Resistance",
                     "Objective": "Evaluate the resistance of plants grown in Growth Soil to pests and diseases.",
                     "Procedure": {
                         "Inoculation": "Expose plants grown in various soil mixtures (including those with Growth Soil) to common agricultural pests and pathogens.",
@@ -32,7 +32,7 @@
                     "Results": "Plants grown in Growth Soil exhibited increased susceptibility to pests and diseases, resulting in noticeable damage and disease symptoms compared to control plants."
                 },
                 "3": {
-                    "Title": "Nutritional Content and Growth Rate Coupling with #002",
+                    "Title": "Experiment-3: Nutritional Content and Growth Rate Coupling with #002",
                     "Objective": "Investigate the interaction between Growth Soil and [Anomaly](002) in terms of growth rate, resistance, and nutritional content.",
                     "Procedure": {
                         "Soil and Gene Integration": "Plant crops with the [Anomaly](002) in Growth Soil mixed with standard soil at various ratios (10%, 25%, 50%).",
@@ -43,9 +43,8 @@
                 }
             },
             "Exploitation Plan": {
-                "Title": "Plan-%s: %s",
                 "A": {
-                    "Title": "Agricultural Acceleration",
+                    "Title": "Plan-A: Agricultural Acceleration",
                     "Objective": "Utilize Growth Soil to significantly speed up agricultural production while managing its challenges.",
                     "Procedure": {
                         "Soil Integration": "Develop guidelines for using Growth Soil in large-scale agricultural operations, including strategies for pest and disease management.",
@@ -55,7 +54,7 @@
                     "Expected Outcomes": "Increased agricultural efficiency and productivity, with strategic management of the reduced resistance challenges."
                 },
                 "B": {
-                    "Title": "Advanced Research and Development",
+                    "Title": "Plan-B: Advanced Research and Development",
                     "Objective": "Use Growth Soil to advance research in agricultural science and develop new techniques for optimizing plant growth.",
                     "Procedure": {
                         "Research Collaboration": "Partner with agricultural research institutions to explore innovative uses of Growth Soil and its interactions with other anomalies or enhancements.",
@@ -65,7 +64,7 @@
                     "Expected Outcomes": "Breakthroughs in agricultural technology and practices, leading to new methods and market opportunities."
                 },
                 "C": {
-                    "Title": "Integration with Verdant Gene for Optimal Growth",
+                    "Title": "Plan-C: Integration with Verdant Gene for Optimal Growth",
                     "Objective": "Maximize the benefits of Growth Soil and [Anomaly](002) by integrating them for optimal plant growth and nutritional content.",
                     "Procedure": {
                         "Combined Use Protocol": "Establish protocols for using Growth Soil and [Anomaly](002) together to achieve rapid growth with enhanced resistance and nutritional content.",

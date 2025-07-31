@@ -11,9 +11,8 @@
             "Description": "Anomaly-001 is a sophisticated device designed to manipulate and alter human memory. The device consists of a set of intricately carved gears and levers encased in a polished wooden frame. Its surface is engraved with arcane symbols that seem to shimmer faintly under low light. When activated, Anomaly-001 allows its user to alter, erase, or implant memories in individuals. It possesses the unique ability to erase all memories related to a specific person from the target's consciousness, including any associated emotional or sensory experiences.",
             "Discovery and Initial Analysis": "Anomaly-001 was discovered in early 18██ during an investigation into the origins of the CAGE Foundation. The device was found hidden within an ancient vault in a remote location, previously owned by a secretive order known for their interest in memory manipulation. Initial tests revealed the device's capabilities to alter memories on a profound level, including complete erasure of personal connections.",
             "Experiment Log": {
-                "Title": "Experiment-%s: %s",
                 "1": {
-                    "Title": "Memory Erasure of Specific Person",
+                    "Title": "Experiment-1: Memory Erasure of Specific Person",
                     "Objective": "Test the ability of Anomaly-001 to completely erase memories related to a specific individual.",
                     "Procedure": {
                         "Selection": "Choose a Level-0 personnel with a documented personal history involving a specific individual.",
@@ -23,7 +22,7 @@
                     "Results": "The targeted memories were completely erased, including any emotional or sensory details. The subject showed no signs of residual memory or recognition of the individual, demonstrating the device's total efficacy."
                 },
                 "2": {
-                    "Title": "Memory Implantation",
+                    "Title": "Experiment-2: Memory Implantation",
                     "Objective": "Investigate the capability of Anomaly-001 to implant new memories",
                     "Procedure": {
                         "Design": "Develop a set of fabricated memories for implantation.",
@@ -34,9 +33,8 @@
                 }
             },
             "Exploitation Plan": {
-                "Title": "Plan-%s: %s",
                 "A": {
-                    "Title": "Foundation’s Strategic Asset",
+                    "Title": "Plan-A: Foundation’s Strategic Asset",
                     "Objective": "Utilize Anomaly-001 for strategic advantages within the CAGE Foundation.",
                     "Steps": {
                         "High-Value Personnel Reassignment": "Employ Anomaly-001 to erase or alter the memories of key personnel for reassignments or to integrate into high-security roles.",
