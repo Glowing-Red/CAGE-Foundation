@@ -91,7 +91,7 @@ async function CreateParagraph(title, text) {
 async function CreateTitle(table, item) {
     const length = GetLength(table);
 
-    if (length <= 1) {
+    if (length <= 0) {
         return;
     }
 
@@ -123,11 +123,12 @@ async function CreateTitle(table, item) {
             });
 
             Instance("h3", {
-                "Text": FormatString(table["Title"], key, value["Title"])
+                "Text": value["Title"]
             }, itemDiv);
 
             for (const [key_2, value_2] of Object.entries(value)) {
                 if (key_2 !== "Title") {
+                    console.log("key_2", key_2, "value_2", value_2)
                     if (IsTable(value_2)) {
                         const keyDiv = Instance("div", {}, itemContainer);
                         const container = Instance("div", {
@@ -141,13 +142,26 @@ async function CreateTitle(table, item) {
                         }, keyDiv);
 
                         for (const [key_3, value_3] of Object.entries(value_2)) {
-                            Instance("p", {
-                                "Html": await FormatText(`**${key_3}:** ${value_3}`)
-                            }, container);
+                            if (IsArray(value_3)) {
+                                Instance("p", {
+                                    "Html": await FormatText(`**${key_3}:** ${value_3.join("")}`)
+                                }, container);
+                            }
+                            else {
+                                Instance("p", {
+                                    "Html": await FormatText(`**${key_3}:** ${value_3}`)
+                                }, container);
+                            }
                         }
 
                         container.Parent = keyDiv;
-                    } else {
+                    }
+                    else if (IsArray(value_2)) {
+                        Instance("p", {
+                            "Html": await FormatText(`**${key_2}:** ${value_2.join("")}`)
+                        }, itemContainer);
+                    }
+                    else {
                         Instance("p", {
                             "Html": await FormatText(`**${key_2}:** ${value_2}`)
                         }, itemContainer);
