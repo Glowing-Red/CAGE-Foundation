@@ -67,6 +67,16 @@ async function Init() {
                 }
             }
         }
+        
+        const template = document.querySelector('#anomaly-template');
+        console.log("template?", template)
+
+        // Access title and versions BEFORE cloning
+        const titletest = template.dataset.title;
+        const versions = JSON.parse(template.dataset.versions);
+        
+        console.log("Title:", titletest);         // "Anomaly-001"
+        console.log("Versions:", versions);   // ["1.2.0", "1.1.0", "1.0.0"]
     } catch (error) {
         console.error("Initialization error:", error);
     }
