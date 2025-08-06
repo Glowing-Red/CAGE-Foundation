@@ -9,8 +9,8 @@ async function Init() {
 
         const parser = new DOMParser();
         const anomalyDoc = parser.parseFromString(anomalyTemplate, "text/html");
-        
-        const template = document.querySelector('#anomaly-template');
+
+        var template = document.querySelector('#anomaly-template');
         console.log("template?", template);
         template.remove();
 
@@ -24,54 +24,25 @@ async function Init() {
         document.body.appendChild(headerClone);
         document.body.appendChild(template);
         
-        // Access title and versions BEFORE cloning
-        const titletest = template.dataset.title;
+        const title = template.dataset.title;
         const versions = JSON.parse(template.dataset.versions);
-        
-        console.log("Title:", titletest);         // "Anomaly-001"
-        console.log("Versions:", versions);   // ["1.2.0", "1.1.0", "1.0.0"]
-
-        const raw = await FetchJson("./Document.json");
-        const table = raw.History[raw.Ids[0]];
-        const title = GetTitle(raw);
 
         content = document.querySelector("#body").querySelector(".content");
         document.title = `Cage: ${title}`
         document.documentElement.style.setProperty("--header-height", `${headerClone.getBoundingClientRect().height}px`);
+        
+        Array.from(template.content.children).forEach(child => {
+            child.style.display = "none";
+            content.appendChild(child);
+        });
+        
+        template.remove();
+        template = null;
 
-        const docDiv = Instance("div", {}, content);
-        if (IsValidString(table["Title"])) {
-            Instance("h2", {
-                "Text": title
-            }, docDiv);
-        }
-
-        if (table["Index"]) {
-            Instance("p", {
-                "Html": await FormatText(`**Title:** ${title}`)
-            }, docDiv);
-
-            Instance("p", {
-                "Html": await FormatText(`**Index:** #${table["Index"]}`)
-            }, docDiv);
-        }
-
-        for (const [key, value] of Object.entries(table)) {
-            if (IsTable(value)) {
-                if (!titleFilter.includes(key)) {
-                    await CreateTitle(value, key);
-                }
-            }
-            else if (IsArray(value)) {
-                if (!paragraphFilter.includes(key)) {
-                    await CreateParagraph(key, value.join(""));
-                }
-            }
-            else {
-                if (!paragraphFilter.includes(key)) {
-                    await CreateParagraph(key, value);
-                }
-            }
+        const history = content.querySelector(`[data-version="V${versions[0]}"]`);
+        
+        if (IsElement(history)) {
+            history.style.display = "";
         }
     } catch (error) {
         console.error("Initialization error:", error);
@@ -80,110 +51,6 @@ async function Init() {
 
 async function CreateTag(table) {
 
-}
-
-async function CreateParagraph(title, text) {
-    const div = Instance("div", {});
-
-    Instance("p", {
-        "Html": await FormatText(FormatString("**%s:** %s", title, text))
-    }, div);
-
-    div.Parent = content;
-
-    return div;
-}
-
-async function CreateTitle(table, item) {
-    const length = GetLength(table);
-
-    if (length <= 0) {
-        return;
-    }
-
-    const titleDiv = Instance("div", {});
-    const itemsContainer = Instance("div", {
-        "Class": "flex-column",
-        "Style": {
-            "gap": "15px"
-        }
-    });
-
-    Instance("h2", {
-        "Text": length > 2 ? item + "s" : item
-    }, titleDiv);
-
-    for (const [key, value] of Object.entries(table)) {
-        if (IsTable(value)) {
-            const itemDiv = Instance("div", {
-                "Style": {
-                    "marginLeft": "20px"
-                }
-            });
-            const itemContainer = Instance("div", {
-                "Class": "flex-column",
-                "Style": {
-                    "marginLeft": "20px",
-                    "gap": "5px"
-                }
-            });
-
-            Instance("h3", {
-                "Text": value["Title"]
-            }, itemDiv);
-
-            for (const [key_2, value_2] of Object.entries(value)) {
-                if (key_2 !== "Title") {
-                    console.log("key_2", key_2, "value_2", value_2)
-                    if (IsTable(value_2)) {
-                        const keyDiv = Instance("div", {}, itemContainer);
-                        const container = Instance("div", {
-                            "Style": {
-                                "marginLeft": "15px"
-                            }
-                        });
-
-                        Instance("p", {
-                            "Html": await FormatText(`**${key_2}:**`)
-                        }, keyDiv);
-
-                        for (const [key_3, value_3] of Object.entries(value_2)) {
-                            if (IsArray(value_3)) {
-                                Instance("p", {
-                                    "Html": await FormatText(`**${key_3}:** ${value_3.join("")}`)
-                                }, container);
-                            }
-                            else {
-                                Instance("p", {
-                                    "Html": await FormatText(`**${key_3}:** ${value_3}`)
-                                }, container);
-                            }
-                        }
-
-                        container.Parent = keyDiv;
-                    }
-                    else if (IsArray(value_2)) {
-                        Instance("p", {
-                            "Html": await FormatText(`**${key_2}:** ${value_2.join("")}`)
-                        }, itemContainer);
-                    }
-                    else {
-                        Instance("p", {
-                            "Html": await FormatText(`**${key_2}:** ${value_2}`)
-                        }, itemContainer);
-                    }
-                }
-            }
-
-            itemContainer.Parent = itemDiv;
-            itemDiv.Parent = itemsContainer;
-        }
-    }
-
-    itemsContainer.Parent = titleDiv;
-    titleDiv.Parent = content;
-
-    return titleDiv;
 }
 
 function LoadDocument(sourceDoc, targetDoc) {

@@ -8,14 +8,18 @@ function FetchJson(jsonPath) {
     });
 }
 
-function FetchPrefab(targetPrefab) {
-    return fetch(`../../Prefabs/${targetPrefab}.html`).then(response => {
+function FetchHtml(path) {
+    return fetch(path).then(response => {
         if (!response.ok) {
             throw new Error("Network response was not ok " + response.statusText);
         }
 
         return response.text();
     });
+}
+
+function FetchPrefab(targetPrefab) {
+    return FetchHtml(`../../Prefabs/${targetPrefab}.html`);
 }
 
 function GetTitle(raw) {
@@ -102,6 +106,10 @@ function IsTable(item) {
 
 function IsArray(item) {
     return Array.isArray(item);
+}
+
+function IsElement(instance) {
+    return (instance instanceof HTMLElement);
 }
 
 function IsValidString(value) {
