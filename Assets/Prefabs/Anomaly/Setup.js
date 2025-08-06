@@ -9,27 +9,33 @@ async function Init() {
 
         const parser = new DOMParser();
         const anomalyDoc = parser.parseFromString(anomalyTemplate, "text/html");
+        
+        const template = document.querySelector('#anomaly-template');
+        console.log("template?", template);
+        template.remove();
 
         await LoadDocument(anomalyDoc.head, document.head);
         await LoadDocument(anomalyDoc.body, document.body);
 
         const headerPrefab = await FetchPrefab("Header");
-        const anomalyPrefab = await FetchPrefab("Anomaly");
-
         const headerPrefabDoc = parser.parseFromString(headerPrefab, "text/html");
-        const anomalyPrefabDoc = parser.parseFromString(anomalyPrefab, "text/html");
-
         const headerClone = headerPrefabDoc.querySelector("template").content.cloneNode(true).querySelector('.header');
-        const anomalyClone = anomalyPrefabDoc.querySelector("template").content.cloneNode(true).querySelector('.container');
 
         document.body.appendChild(headerClone);
-        document.body.appendChild(anomalyClone);
+        document.body.appendChild(template);
+        
+        // Access title and versions BEFORE cloning
+        const titletest = template.dataset.title;
+        const versions = JSON.parse(template.dataset.versions);
+        
+        console.log("Title:", titletest);         // "Anomaly-001"
+        console.log("Versions:", versions);   // ["1.2.0", "1.1.0", "1.0.0"]
 
         const raw = await FetchJson("./Document.json");
         const table = raw.History[raw.Ids[0]];
         const title = GetTitle(raw);
 
-        content = anomalyClone.querySelector(".content");
+        content = document.querySelector("#body").querySelector(".content");
         document.title = `Cage: ${title}`
         document.documentElement.style.setProperty("--header-height", `${headerClone.getBoundingClientRect().height}px`);
 
@@ -67,16 +73,6 @@ async function Init() {
                 }
             }
         }
-        
-        const template = document.querySelector('#anomaly-template');
-        console.log("template?", template)
-
-        // Access title and versions BEFORE cloning
-        const titletest = template.dataset.title;
-        const versions = JSON.parse(template.dataset.versions);
-        
-        console.log("Title:", titletest);         // "Anomaly-001"
-        console.log("Versions:", versions);   // ["1.2.0", "1.1.0", "1.0.0"]
     } catch (error) {
         console.error("Initialization error:", error);
     }
