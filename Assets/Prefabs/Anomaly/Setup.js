@@ -1,6 +1,21 @@
 const paragraphFilter = ["Title", "Index"];
 const titleFilter = ["Tags"];
 
+
+async function CreateTag(table) {
+
+}
+
+function FetchTemplate() {
+    return fetch("../../Prefabs/Anomaly/Template.html").then(response => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok " + response.statusText);
+        }
+
+        return response.text();
+    });
+}
+
 async function Init() {
     try {
         const anomalyTemplate = await FetchTemplate();
@@ -9,27 +24,25 @@ async function Init() {
         const anomalyDoc = parser.parseFromString(anomalyTemplate, "text/html");
 
         var template = document.querySelector('#anomaly-template');
-        console.log("template?", template);
+
+        const title = template.dataset.title;
+        const versions = JSON.parse(template.dataset.versions);
+
         template.remove();
+        template = null;
 
         await LoadDocument(anomalyDoc.head, document.head);
         await LoadDocument(anomalyDoc.body, document.body);
 
         const headerPrefab = await FetchPrefab("Header");
         const headerPrefabDoc = parser.parseFromString(headerPrefab, "text/html");
-        const headerClone = headerPrefabDoc.querySelector("template").content.cloneNode(true).querySelector('.header');
-
-        document.body.appendChild(headerClone);
-
-        const title = template.dataset.title;
-        const versions = JSON.parse(template.dataset.versions);
-
-        const content = document.querySelector("#body").querySelector(".content");
+        const header = headerPrefabDoc.querySelector("template").content.querySelector('.header');
+        
+        document.body.insertBefore(header, document.body.firstChild);
+        document.body.insertBefore(document.querySelector("#body"), header.nextSibling);
+        
         document.title = `Cage: ${title}`
-        document.documentElement.style.setProperty("--header-height", `${headerClone.getBoundingClientRect().height}px`);
-
-        template.remove();
-        template = null;
+        document.documentElement.style.setProperty("--header-height", `${header.getBoundingClientRect().height}px`);
 
         ForArray(versions, (i, v) => {
             console.log("Test?", i, v);
@@ -60,10 +73,6 @@ async function Init() {
     } catch (error) {
         console.error("Init() - error:", error);
     }
-};
-
-async function CreateTag(table) {
-
 }
 
 function LoadDocument(sourceDoc, targetDoc) {
@@ -98,23 +107,26 @@ function LoadDocument(sourceDoc, targetDoc) {
     });
 }
 
-function FetchTemplate() {
-    return fetch("../../Prefabs/Anomaly/Template.html").then(response => {
-        if (!response.ok) {
-            throw new Error("Network response was not ok " + response.statusText);
-        }
-
-        return response.text();
-    });
-}
-
 async function LoadVersion(version) {
     try {
-        const fetchedDocument = await FetchHtml(`./Versions/${version}.html`);
+        const fetchedHtml = await FetchHtml(`./Versions/${version}.html`);
+        
+        const parser = new DOMParser();
 
+        const content = document.querySelector("#document");
+        const parsedHtml = parser.parseFromString(fetchedHtml, "text/html");
+        const template = parsedHtml.querySelector("template");
+
+        while (content.firstChild) {
+            content.removeChild(content.firstChild);
+        }
+
+        while (template.content.firstChild) {
+            content.appendChild(template.content.firstChild);
+        }
+        
         console.log("version", version);
-        console.log("fetched", typeof fetchedDocument);
-        console.log("children?", fetchedDocument.content.children);
+        console.log("fetched", typeof fetchedHtml);
 
         return true;
     } catch (error) {
