@@ -1,8 +1,6 @@
 const paragraphFilter = ["Title", "Index"];
 const titleFilter = ["Tags"];
 
-let content;
-
 async function Init() {
     try {
         const anomalyTemplate = await FetchTemplate();
@@ -22,30 +20,45 @@ async function Init() {
         const headerClone = headerPrefabDoc.querySelector("template").content.cloneNode(true).querySelector('.header');
 
         document.body.appendChild(headerClone);
-        document.body.appendChild(template);
-        
+
         const title = template.dataset.title;
         const versions = JSON.parse(template.dataset.versions);
 
-        content = document.querySelector("#body").querySelector(".content");
+        const content = document.querySelector("#body").querySelector(".content");
         document.title = `Cage: ${title}`
         document.documentElement.style.setProperty("--header-height", `${headerClone.getBoundingClientRect().height}px`);
-        
-        Array.from(template.content.children).forEach(child => {
-            child.style.display = "none";
-            content.appendChild(child);
-        });
-        
+
         template.remove();
         template = null;
 
-        const history = content.querySelector(`[data-version="V${versions[0]}"]`);
-        
-        if (IsElement(history)) {
-            history.style.display = "";
+        ForArray(versions, (i, v) => {
+            console.log("Test?", i, v);
+        });
+
+        const params = new URLSearchParams(window.location.search);
+
+        if (params.has("Version")) {
+            const version = params.get("Version");
+
+            const loadedVersion = await LoadVersion(version);
+            console.log("loaded?", loadedVersion);
+
+            if (!loadedVersion) {
+                const url = new URL(window.location);
+
+                url.searchParams.delete("Version");
+                window.history.replaceState({}, '', url);
+
+                if (versions.length > 0) {
+                    LoadVersion(versions[0]);
+                }
+            }
+        } else if (versions.length > 0) {
+            LoadVersion(versions[0]);
         }
+
     } catch (error) {
-        console.error("Initialization error:", error);
+        console.error("Init() - error:", error);
     }
 };
 
@@ -93,6 +106,20 @@ function FetchTemplate() {
 
         return response.text();
     });
+}
+
+async function LoadVersion(version) {
+    try {
+        const fetchedDocument = await FetchHtml(`./Versions/${version}.html`);
+
+        console.log("version", version);
+        console.log("fetched", typeof fetchedDocument);
+        console.log("children?", fetchedDocument.content.children);
+
+        return true;
+    } catch (error) {
+        return false;
+    }
 }
 
 // Initialize the script
