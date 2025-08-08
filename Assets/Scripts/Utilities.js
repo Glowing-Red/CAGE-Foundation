@@ -19,7 +19,7 @@ function FetchHtml(path) {
 }
 
 function FetchPrefab(targetPrefab) {
-    return FetchHtml(`../../Prefabs/${targetPrefab}.html`);
+    return FetchHtml(`../../Assets/Components/${targetPrefab}.html`);
 }
 
 function GetTitle(raw) {
@@ -168,6 +168,14 @@ function ToString(parameter) {
     return String(parameter);
 }
 
+function Wait(milliseconds) {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
+function GetRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function GetLength(table) {
     return Object.keys(table).length;
 }
@@ -250,8 +258,49 @@ function Instance(Instance, Properties, Parent) {
     return element;
 }
 
-/*
-   for (const [key, value] of Object.entries(table)) {
+function IsOverflow(element) {
+    return element.scrollWidth > element.clientWidth || element.scrollHeight > element.clientHeight;
+}
 
-   }
-*/
+function WrapText(element) {
+    if (element.UpdateTextWrap) {
+        return;
+    }
+
+    const originalFontSize = parseFloat(window.getComputedStyle(element).fontSize);
+
+    function ResizeFontSize() {
+        let fontSize = parseFloat(window.getComputedStyle(element).fontSize);
+
+        while (IsOverflow(element) && fontSize > 1) {
+            fontSize--;
+            element.style.fontSize = `${fontSize}px`;
+        }
+
+        while (!IsOverflow(element) && (originalFontSize && fontSize < originalFontSize)) {
+            fontSize++;
+            element.style.fontSize = `${fontSize}px`;
+
+            if (IsOverflow(element)) {
+                fontSize--;
+                element.style.fontSize = `${fontSize}px`;
+
+                return;
+            }
+        }
+    }
+
+    ResizeFontSize();
+
+    Object.defineProperty(element, "UpdateTextWrap", {
+        value: function () {
+            ResizeFontSize();
+        }
+    });
+
+    const observer = new ResizeObserver(() => {
+        ResizeFontSize();
+    });
+
+    observer.observe(document.body);
+}

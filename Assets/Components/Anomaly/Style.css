@@ -1,0 +1,37 @@
+.content {
+    height: auto;
+    min-height: 100%;
+    width: 70%;
+}
+
+p.start {
+    margin-top: 0px;
+}
+
+p.normal {
+    margin: 16px 0;
+}
+
+p.end {
+    margin-top: 16px;
+}
+
+ul {
+    margin-left: 20px;
+}
+
+li {
+    margin-left: 6px;
+}
+
+.test_1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+    gap: 16px;
+}
+
+.test_1 img {
+    width: 50%;
+}

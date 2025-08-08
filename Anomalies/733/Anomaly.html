@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="../../Assets/Styles/Universal.css">
+</head>
+
+<body>
+    <!-- Anomaly -->
+    <template
+        id="anomaly-template"
+        data-title="Ouroboros"
+        data-versions='["2.0.0", "1.0.0"]'
+        data-site="24"
+    ></template>
+    
+    <!-- Setup -->
+    <div id="loading-overlay" style="
+        position: fixed;
+        inset: 0;
+        background: black;
+        color: white;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    "><div class="spinner"></div></div>
+
+    <script>
+        document.documentElement.appendChild(document.getElementById("loading-overlay"));
+    </script>
+    <script src="../../Assets/Components/Anomaly/Setup.js"></script>
+</body>
+
+</html>
