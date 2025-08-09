@@ -6,40 +6,56 @@ async function CreateTag(table) {
 
 }
 
-function FetchTemplate() {
-    return fetch("../../Assets/Components/Anomaly/Template.html").then(response => {
-        if (!response.ok) {
-            throw new Error("Network response was not ok " + response.statusText);
-        }
-
-        return response.text();
-    });
+async function FileExists(path) {
+    try {
+        const response = await fetch(path, { method: "HEAD" });
+        
+        return response.ok;
+    } catch {
+        return false;
+    }
 }
 
-function loadScript(src) {
+function LoadScript(path) {
     return new Promise((resolve, reject) => {
-        if (document.querySelector(`script[src="${src}"]`)) {
+        if (document.querySelector(`script[src="${path}"]`)) {
             resolve();
 
             return;
         }
 
         const script = document.createElement("script");
-        script.src = src;
+        script.src = path;
         script.async = false;
         script.onload = () => resolve();
-        script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
+        script.onerror = () => reject(new Error(`Failed to load script: ${path}`));
 
         document.body.appendChild(script);
     });
 }
 
+function LoadStyle(path, parent) {
+    return new Promise((resolve, reject) => {
+        if (document.querySelector(`link[href="${path}"]`)) {
+            resolve();
+            return;
+        }
+
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = path;
+        link.onload = () => resolve();
+        link.onerror = () => reject(new Error(`Failed to load CSS: ${path}`));
+
+        parent.appendChild(link);
+    });
+}
+
 async function Init() {
     try {
-        await loadScript("../../Assets/Scripts/Utilities.js");
+        await LoadScript("../../Assets/Scripts/Utilities.js");
+        const anomalyTemplate = await FetchHtml("../../Assets/Components/Anomaly/Template.html");
 
-        const anomalyTemplate = await FetchTemplate();
-        
         const iframe = document.createElement("iframe");
         iframe.style.display = "none";
         document.body.appendChild(iframe);
@@ -69,30 +85,8 @@ async function Init() {
 
         iframeDoc.title = `Cage: ${title}`
 
-        ForArray(versions, (i, v) => {
-            console.log("Test?", i, v);
-        });
-
-        const params = new URLSearchParams(window.location.search);
-
-        if (params.has("Version")) {
-            const version = params.get("Version");
-
-            const loadedVersion = await LoadVersion(version);
-            console.log("loaded?", loadedVersion);
-
-            if (!loadedVersion) {
-                const url = new URL(window.location);
-
-                url.searchParams.delete("Version");
-                window.history.replaceState({}, "", url);
-
-                if (versions.length > 0) {
-                    LoadVersion(versions[0]);
-                }
-            }
-        } else if (versions.length > 0) {
-            LoadVersion(versions[0]);
+        if (await FileExists("./Style.css")) {
+            await LoadStyle("./Style.css", iframeDoc.head);
         }
 
         const observer = new MutationObserver(() => {
@@ -107,7 +101,32 @@ async function Init() {
         document.documentElement.replaceChild(iframeDoc.body, document.body);
 
         iframe.remove();
-        
+
+        ForArray(versions, (i, v) => {
+            console.log("Test?", i, v);
+        });
+
+        const params = new URLSearchParams(window.location.search);
+
+        if (await FileExists("./Script.js")) {
+            await LoadScript("./Script.js");
+        }
+
+        if (params.has("Version")) {
+            const version = params.get("Version");
+
+            const loadedVersion = await LoadVersion(version);
+
+            if (!loadedVersion) {
+                const url = new URL(window.location);
+                url.searchParams.delete("Version");
+
+                window.location.href = url.toString();
+            }
+        } else if (versions.length > 0) {
+            LoadVersion(versions[0]);
+        }
+
         await Wait(GetRandomNumber(700, 1200));
 
         const loadingOverlay = document.getElementById("loading-overlay");
@@ -128,8 +147,9 @@ async function Init() {
 
         function onOverlayFadeEnd(event) {
             if (event.propertyName === "opacity" && event.target === loadingOverlay) {
-                loadingOverlay.remove();
                 loadingOverlay.removeEventListener("transitionend", onOverlayFadeEnd);
+
+                loadingOverlay.remove();
             }
         }
 
@@ -139,41 +159,13 @@ async function Init() {
     }
 }
 
-function LoadDocument(sourceDoc, targetDoc) {
-    return new Promise((resolve, reject) => {
-        targetDoc.innerHTML = sourceDoc.innerHTML;
-
-        const scripts = sourceDoc.querySelectorAll("script");
-        let scriptLoadPromises = [];
-
-        scripts.forEach(oldScript => {
-            const newScript = document.createElement("script");
-            newScript.type = oldScript.type ? oldScript.type : "text/javascript";
-
-            if (oldScript.src) {
-                newScript.src = oldScript.src;
-                newScript.async = false;
-
-                let scriptPromise = new Promise((resolve, reject) => {
-                    newScript.onload = resolve;
-                    newScript.onerror = reject;
-                })
-
-                scriptLoadPromises.push(scriptPromise);
-                targetDoc.appendChild(newScript);
-            } else {
-                newScript.textContent = oldScript.innerText;
-                targetDoc.appendChild(newScript);
-            }
-        });
-
-        Promise.all(scriptLoadPromises).then(resolve).catch(reject);
-    });
-}
-
 async function LoadVersion(version) {
     try {
         const fetchedHtml = await FetchHtml(`./Versions/${version}/Document.html`);
+
+        if (await FileExists(`./Versions/${version}/Style.css`)) {
+            await LoadStyle(`./Versions/${version}/Style.css`, document.head);
+        }
 
         const parser = new DOMParser();
 
@@ -189,11 +181,17 @@ async function LoadVersion(version) {
             content.appendChild(template.content.firstChild);
         }
 
+        if (await FileExists(`./Versions/${version}/Script.js`)) {
+            await LoadScript(`./Versions/${version}/Script.js`);
+        }
+
         console.log("version", version);
         console.log("fetched", typeof fetchedHtml);
 
         return true;
     } catch (error) {
+        console.log("err", error);
+
         return false;
     }
 }

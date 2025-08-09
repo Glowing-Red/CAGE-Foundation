@@ -16,15 +16,18 @@
     
     <!-- Setup -->
     <div id="loading-overlay" style="
-        position: fixed;
-        inset: 0;
-        background: black;
-        color: white;
-        z-index: 9999;
         display: flex;
         justify-content: center;
         align-items: center;
+
+        position: fixed;
+        background: black;
+        color: white;
+
+        inset: 0;
+        z-index: 9999;
     "><div class="spinner"></div></div>
+    <div id="scrollbar-cover"></div>
 
     <script>
         document.documentElement.appendChild(document.getElementById("loading-overlay"));
